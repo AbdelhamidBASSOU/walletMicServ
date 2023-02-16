@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/wallet")
 public class WalletResource {
     private final WalletService walletService;
 
