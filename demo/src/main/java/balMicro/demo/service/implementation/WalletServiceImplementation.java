@@ -4,16 +4,15 @@ import balMicro.demo.entity.Currency;
 import balMicro.demo.entity.Wallet;
 import balMicro.demo.repository.WalletRepository;
 import balMicro.demo.service.WalletService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class WalletServiceImplementation implements WalletService {
 
-    @Autowired
-    private WalletRepository walletRepository;
+    private final WalletRepository walletRepository;
 
     public List<Wallet> getAll() {
         return walletRepository.findAll();
@@ -33,9 +32,42 @@ public class WalletServiceImplementation implements WalletService {
     }
 
     public Wallet addWallet(Wallet wallet) {
+        wallet.setCurrency(Currency.USD);
         return walletRepository.save(wallet);
     }
 
+    @Override
+    public Wallet getOne(String walletId){
+        return walletRepository.findById(walletId).orElseThrow(() -> new IllegalArgumentException("Invalid wallet ID"));
+    }
 
+    @Override
+    public double checkBalance(String walletId) {
+        Wallet wallet = walletRepository.findById(walletId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid wallet ID"));
+        return wallet.getBalance();
+    }
 
+    @Override
+    public double creditAmount(String walletId, double amount) {
+        Wallet wallet = walletRepository.findById(walletId).orElseThrow(() -> new IllegalArgumentException("Invalid wallet ID"));
+        double newBalance = wallet.getBalance() + amount;
+        wallet.setBalance(newBalance);
+        walletRepository.save(wallet);
+        return newBalance;
+    }
+
+    @Override
+    public double debitAmount(String walletId, double amount) {
+        Wallet wallet = walletRepository.findById(walletId).orElseThrow(() -> new IllegalArgumentException("Invalid wallet ID"));
+        double currentBalance = wallet.getBalance();
+        if (currentBalance >= amount) {
+            double newBalance = currentBalance - amount;
+            wallet.setBalance(newBalance);
+            walletRepository.save(wallet);
+            return newBalance;
+        } else {
+            throw new IllegalStateException("Insufficient balance in wallet with id : " + walletId);
+        }
+    }
 }

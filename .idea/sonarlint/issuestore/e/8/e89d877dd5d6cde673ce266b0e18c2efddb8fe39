@@ -1,7 +1,7 @@
 
-r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«Ãëáüÿÿÿÿ8É‰©àâ0
+k	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(«Ãëáüÿÿÿÿ
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÀˆºÔ
-]
-java:S4684"@Replace this persistent entity with a simple POJO or DTO object.(ÍÛ«­8Ø–—áâ0
-b
-java:S4684"@Replace this persistent entity with a simple POJO or DTO object.(«Ãëáüÿÿÿÿ8Ø–—áâ0
+V
+java:S4684"@Replace this persistent entity with a simple POJO or DTO object.(ÍÛ«­
+[
+java:S4684"@Replace this persistent entity with a simple POJO or DTO object.(«Ãëáüÿÿÿÿ

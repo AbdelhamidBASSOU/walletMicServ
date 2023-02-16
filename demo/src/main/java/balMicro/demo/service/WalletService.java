@@ -12,4 +12,12 @@ public interface WalletService {
     Wallet addWallet(Wallet wallet);
 
     Wallet updateWallet(String id, Wallet wallet);
+
+    Wallet getOne(String walletId);
+
+    double checkBalance(String walletId);
+
+    double creditAmount(String walletId, double amount);
+
+    double debitAmount(String walletId, double amount);
 }
